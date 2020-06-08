@@ -13,9 +13,16 @@ public interface WeatherRepository extends JpaRepository<Weather, Long> {
     public List<Weather> findByDateRecordedBetweenAndLocationLatitudeAndLocationLongitude(
             Date startDate, Date endDate, Float latitude, Float longitude);
 
+    public List<Weather> findByDateRecordedAndLocationLatitudeAndLocationLongitude(Date date, Float latitude,
+                                                                              Float longitude);
+
     @Transactional
     public Long deleteByDateRecordedBetween(Date startDate, Date endDate);
 
     @Transactional
     public Long deleteByLocationLatitudeAndLocationLongitude(Float latitude, Float longitude);
+
+    @Transactional
+    public Long deleteByDateRecordedBetweenAndLocationLatitudeAndLocationLongitude(
+            Date startDate, Date endDate, Float latitude, Float longitude);
 }

@@ -11,10 +11,10 @@ public class LocationResponseAdapter implements ResponseDTOAdapter<Location, Loc
         // use reflection
         LocationDTO dto = new LocationDTO();
         dto.setId(location.getId());
-        dto.setCityName(location.getCityName());
-        dto.setStateName(location.getStateName());
-        dto.setLatitude(location.getLatitude());
-        dto.setLongitude(location.getLongitude());
+        dto.setCity(location.getCityName());
+        dto.setState(location.getStateName());
+        dto.setLat(location.getLatitude());
+        dto.setLon(location.getLongitude());
         return dto;
     }
 

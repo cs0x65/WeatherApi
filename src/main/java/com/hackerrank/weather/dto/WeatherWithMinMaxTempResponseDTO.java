@@ -1,60 +1,52 @@
 package com.hackerrank.weather.dto;
 
 public class WeatherWithMinMaxTempResponseDTO implements ResponseDTO{
-    private String cityName;
-    private String stateName;
-    private Float latitude;
-    private Float longitude;
-    private String dateRecorded;
-    private Float highest;
+    private String city;
+    private String state;
+    private Float lat;
+    private Float lon;
+    private String date;
     private Float lowest;
+    private Float highest;
 
-    public String getCityName() {
-        return cityName;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getStateName() {
-        return stateName;
+    public String getState() {
+        return state;
     }
 
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public Float getLatitude() {
-        return latitude;
+    public Float getLat() {
+        return lat;
     }
 
-    public void setLatitude(Float latitude) {
-        this.latitude = latitude;
+    public void setLat(Float lat) {
+        this.lat = lat;
     }
 
-    public Float getLongitude() {
-        return longitude;
+    public Float getLon() {
+        return lon;
     }
 
-    public void setLongitude(Float longitude) {
-        this.longitude = longitude;
+    public void setLon(Float lon) {
+        this.lon = lon;
     }
 
-    public String getDateRecorded() {
-        return dateRecorded;
+    public String getDate() {
+        return date;
     }
 
-    public void setDateRecorded(String dateRecorded) {
-        this.dateRecorded = dateRecorded;
-    }
-
-    public Float getHighest() {
-        return highest;
-    }
-
-    public void setHighest(Float highest) {
-        this.highest = highest;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Float getLowest() {
@@ -63,5 +55,13 @@ public class WeatherWithMinMaxTempResponseDTO implements ResponseDTO{
 
     public void setLowest(Float lowest) {
         this.lowest = lowest;
+    }
+
+    public Float getHighest() {
+        return highest;
+    }
+
+    public void setHighest(Float highest) {
+        this.highest = highest;
     }
 }

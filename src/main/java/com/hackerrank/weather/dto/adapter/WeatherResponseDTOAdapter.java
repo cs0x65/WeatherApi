@@ -16,7 +16,7 @@ public class WeatherResponseDTOAdapter implements ResponseDTOAdapter<Weather, We
         dto.setId(weather.getId());
         dto.setLocation(new LocationResponseAdapter().build(weather.getLocation()));
         dto.setTemperature(DTOUtil.buildTemperature(weather.getTemperature()));
-        dto.setDateRecorded(DateTimeUtil.getDateFormat().format(weather.getDateRecorded()));
+        dto.setDate(DateTimeUtil.getDateFormat().format(weather.getDateRecorded()));
         return dto;
     }
 

@@ -2,10 +2,10 @@ package com.hackerrank.weather.dto;
 
 public class LocationDTO implements RequestDTO, ResponseDTO{
     private Long id;
-    private String cityName;
-    private String stateName;
-    private Float latitude;
-    private Float longitude;
+    private String city;
+    private String state;
+    private Float lat;
+    private Float lon;
 
     public Long getId() {
         return id;
@@ -15,35 +15,35 @@ public class LocationDTO implements RequestDTO, ResponseDTO{
         this.id = id;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getStateName() {
-        return stateName;
+    public String getState() {
+        return state;
     }
 
-    public void setStateName(String stateName) {
-        this.stateName = stateName;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public Float getLatitude() {
-        return latitude;
+    public Float getLat() {
+        return lat;
     }
 
-    public void setLatitude(Float latitude) {
-        this.latitude = latitude;
+    public void setLat(Float lat) {
+        this.lat = lat;
     }
 
-    public Float getLongitude() {
-        return longitude;
+    public Float getLon() {
+        return lon;
     }
 
-    public void setLongitude(Float longitude) {
-        this.longitude = longitude;
+    public void setLon(Float lon) {
+        this.lon = lon;
     }
 }

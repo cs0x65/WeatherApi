@@ -9,8 +9,6 @@ import java.text.ParseException;
 import java.util.Arrays;
 
 public class WeatherRequestDTOAdapter implements RequestDTOAdapter<WeatherDTO, Weather>{
-    Logger logger = Logger.getLogger(getClass());
-
     @Override
     public Weather build(WeatherDTO dto) {
         Weather weather = new Weather();
@@ -18,7 +16,7 @@ public class WeatherRequestDTOAdapter implements RequestDTOAdapter<WeatherDTO, W
         weather.setLocation(new LocationRequestAdapter().build(dto.getLocation()));
         weather.setTemperature(buildTemperature(dto.getTemperature()));
         try {
-            weather.setDateRecorded(DateTimeUtil.getDateFormat().parse(dto.getDateRecorded()));
+            weather.setDateRecorded(DateTimeUtil.getDateFormat().parse(dto.getDate()));
         } catch (ParseException e) {
             Logger.getLogger(getClass()).error("Error parsing date: "+e);
             return null;

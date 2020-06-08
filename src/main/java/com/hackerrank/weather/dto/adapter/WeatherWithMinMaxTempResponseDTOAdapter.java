@@ -14,12 +14,12 @@ public class WeatherWithMinMaxTempResponseDTOAdapter implements
     @Override
     public WeatherWithMinMaxTempResponseDTO build(Weather weather) {
         WeatherWithMinMaxTempResponseDTO dto = new WeatherWithMinMaxTempResponseDTO();
-        dto.setCityName(weather.getLocation().getCityName());
-        dto.setStateName(weather.getLocation().getStateName());
-        dto.setLatitude(weather.getLocation().getLatitude());
-        dto.setLongitude(weather.getLocation().getLongitude());
-        dto.setDateRecorded(DateTimeUtil.getDateFormat().format(weather.getDateRecorded()));
-        dto.setDateRecorded(DateTimeUtil.getDateFormat().format(weather.getDateRecorded()));
+        dto.setCity(weather.getLocation().getCityName());
+        dto.setState(weather.getLocation().getStateName());
+        dto.setLat(weather.getLocation().getLatitude());
+        dto.setLon(weather.getLocation().getLongitude());
+        dto.setDate(DateTimeUtil.getDateFormat().format(weather.getDateRecorded()));
+        dto.setDate(DateTimeUtil.getDateFormat().format(weather.getDateRecorded()));
 
         Float[] temperature = DTOUtil.buildTemperature(weather.getTemperature());
         dto.setHighest(temperature[temperature.length-1]);

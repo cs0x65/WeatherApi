@@ -9,10 +9,10 @@ public class LocationRequestAdapter implements RequestDTOAdapter<LocationDTO, Lo
         // use reflection
         Location location = new Location();
         location.setId(dto.getId());
-        location.setCityName(dto.getCityName());
-        location.setStateName(dto.getStateName());
-        location.setLatitude(dto.getLatitude());
-        location.setLongitude(dto.getLongitude());
+        location.setCityName(dto.getCity());
+        location.setStateName(dto.getState());
+        location.setLatitude(dto.getLat());
+        location.setLongitude(dto.getLon());
         return location;
     }
 }

@@ -2,7 +2,7 @@ package com.hackerrank.weather.dto;
 
 public class WeatherDTO implements RequestDTO, ResponseDTO{
     private Long id;
-    private String dateRecorded;
+    private String date;
     private LocationDTO location;
     private Float[] temperature;
 
@@ -14,12 +14,12 @@ public class WeatherDTO implements RequestDTO, ResponseDTO{
         this.id = id;
     }
 
-    public String getDateRecorded() {
-        return dateRecorded;
+    public String getDate() {
+        return date;
     }
 
-    public void setDateRecorded(String dateRecorded) {
-        this.dateRecorded = dateRecorded;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public LocationDTO getLocation() {
