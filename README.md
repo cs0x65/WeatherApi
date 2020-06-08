@@ -18,7 +18,8 @@ The date format used for dates in the API request/response is: **`yyyy-MM-dd`**
 
 Any of these parameters can be combined to build a valid combination of
 query params, for e.g - http://localhost:8000/erase?start=2020-06-06&endDate=2020-06-08&latitude=13.78&lon=73.10
-- renames the DTO fields.
+
+The POSTMAN collection can be accessed at: https://www.getpostman.com/collections/1a78dad084b27d5302dc
 
 ### Request & response JSON objects
 1.**Create object schema**   
