@@ -21,7 +21,6 @@ public class WeatherWithMinMaxTempResponseDTOAdapter implements
         dto.setDate(DateTimeUtil.getDateFormat().format(weather.getDateRecorded()));
         dto.setHighest(weather.getHighestTemp());
         dto.setLowest(weather.getLowestTemp());
-
         return dto;
     }
 

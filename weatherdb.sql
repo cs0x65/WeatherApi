@@ -71,7 +71,9 @@ CREATE TABLE public.weather (
     id bigint NOT NULL,
     date_recorded date,
     temperature character varying(255),
-    location_id bigint
+    location_id bigint,
+    highest_temp real,
+    lowest_temp real
 );
 
 
@@ -105,13 +107,14 @@ COPY public.location (id, city_name, latitude, longitude, state_name) FROM stdin
 -- Data for Name: weather; Type: TABLE DATA; Schema: public; Owner: champa
 --
 
-COPY public.weather (id, date_recorded, temperature, location_id) FROM stdin;
-14	2020-06-07	20.9,22.0,22.1,23.1,23.8,24.2,24.2,25.1,25.3,26.0,31.5,33.0	5
-15	2020-06-08	30.9,31.5,32.0,32.1,33.0,33.1,33.8,34.2,34.2,35.1,35.3,36.0	5
-30	2020-06-08	30.8,30.9,32.1,33.0,34.2,34.2,35.1,35.3,36.0	6
-31	2020-06-08	20.8,20.9,24.2,24.2,26.0,32.1,33.0,35.1,35.3	6
-32	2020-06-08	20.9,24.2,24.2,26.0,32.1,33.0,35.1,35.3,38.8	5
-33	2020-06-09	24.2,24.2,26.0,30.9,32.1,33.0,35.1,35.3,38.8	5
+COPY public.weather (id, date_recorded, temperature, location_id, highest_temp, lowest_temp) FROM stdin;
+14	2020-06-07	20.9,22.0,22.1,23.1,23.8,24.2,24.2,25.1,25.3,26.0,31.5,33.0	5	\N	\N
+15	2020-06-08	30.9,31.5,32.0,32.1,33.0,33.1,33.8,34.2,34.2,35.1,35.3,36.0	5	\N	\N
+30	2020-06-08	30.8,30.9,32.1,33.0,34.2,34.2,35.1,35.3,36.0	6	\N	\N
+31	2020-06-08	20.8,20.9,24.2,24.2,26.0,32.1,33.0,35.1,35.3	6	\N	\N
+32	2020-06-08	20.9,24.2,24.2,26.0,32.1,33.0,35.1,35.3,38.8	5	\N	\N
+33	2020-06-09	24.2,24.2,26.0,30.9,32.1,33.0,35.1,35.3,38.8	5	\N	\N
+34	2020-06-09	18.5,20.2,22.0,24.2,25.3,26.0,28.8,30.9,32.1,33.0,35.1	5	35.0999985	18.5
 \.
 
 
@@ -126,7 +129,7 @@ SELECT pg_catalog.setval('public.location_seq', 6, true);
 -- Name: weather_seq; Type: SEQUENCE SET; Schema: public; Owner: champa
 --
 
-SELECT pg_catalog.setval('public.weather_seq', 33, true);
+SELECT pg_catalog.setval('public.weather_seq', 34, true);
 
 
 --
