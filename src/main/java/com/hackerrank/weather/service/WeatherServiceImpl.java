@@ -6,7 +6,8 @@ import com.hackerrank.weather.repository.LocationRepository;
 import com.hackerrank.weather.repository.WeatherRepository;
 import com.hackerrank.weather.util.ControllerUtil;
 import com.hackerrank.weather.util.DateTimeUtil;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class WeatherServiceImpl implements WeatherService {
     @Autowired
     private WeatherRepository weatherRepository;
 
-    Logger logger = Logger.getLogger(getClass());
+    Logger logger = LogManager.getLogger(getClass().getName());
 
     @Override
     public Weather create(Weather weather) {
@@ -44,7 +45,7 @@ public class WeatherServiceImpl implements WeatherService {
 
     @Override
     public Weather getById(Long id) {
-        return weatherRepository.findOne(id);
+        return weatherRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -119,7 +120,7 @@ public class WeatherServiceImpl implements WeatherService {
     @Override
     public void deleteById(Long id) {
         logger.warn("Deleting weather data by id: "+id);
-        weatherRepository.delete(id);
+        weatherRepository.deleteById(id);
     }
 
     @Override

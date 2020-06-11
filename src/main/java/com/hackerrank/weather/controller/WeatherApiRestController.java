@@ -7,7 +7,8 @@ import com.hackerrank.weather.dto.adapter.WeatherWithMinMaxTempResponseDTOAdapte
 import com.hackerrank.weather.model.Weather;
 import com.hackerrank.weather.service.WeatherServiceImpl;
 import com.hackerrank.weather.util.ControllerUtil;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 @RestController
 public class WeatherApiRestController {
-    Logger logger = Logger.getLogger(getClass());
+    Logger logger = LogManager.getLogger(getClass().getName());
 
     @Autowired
     private WeatherServiceImpl weatherServiceImpl;
@@ -61,7 +62,7 @@ public class WeatherApiRestController {
         WeatherRequestDTOAdapter adapter = new WeatherRequestDTOAdapter();
         Weather weather = adapter.build(dto);
         weather = weatherServiceImpl.create(weather);
-        return new ResponseEntity<WeatherDTO>(new WeatherResponseDTOAdapter().build(weather), HttpStatus.CREATED);
+        return new ResponseEntity<>(new WeatherResponseDTOAdapter().build(weather), HttpStatus.CREATED);
     }
 
     /**
@@ -101,12 +102,24 @@ public class WeatherApiRestController {
      * weather data with lowest & highest temperature values in the given date range  @ particular location.
      */
     @RequestMapping(path = "/weather", method = RequestMethod.GET)
-    private ResponseEntity getAll(@RequestParam Map<String, String> queryParams){
+    private ResponseEntity<?> getAll(@RequestParam Map<String, String> queryParams){
+        /**
+         * It's not really a great thing to use wildcard in the return type ResponseEntity<?>.
+         * Probably that goes to show why in 1st place, there seems to have a separate API to publish the list of
+         * locations with lowest & highest temperatures.
+         *
+         * But even then, for each controller we can have a possible error response to return - so again we can't keep
+         * the bounded or specific parameterized type for the ResponseEntity being returned.
+         *
+         * Unlike Java, Python allows to provide union of types as a type hint for generics.
+         *
+         * TODO: think of alternative.
+         */
         logger.info("queryParams = "+queryParams);
         if (!queryParams.isEmpty()){
             ControllerUtil.FILTER filter = ControllerUtil.getFilter(queryParams);
             if (filter == ControllerUtil.FILTER.DATE_RANGE_LOCATION_FILTER){
-                return new ResponseEntity(new WeatherWithMinMaxTempResponseDTOAdapter().buildAll(
+                return new ResponseEntity<>(new WeatherWithMinMaxTempResponseDTOAdapter().buildAll(
                         weatherServiceImpl.getByFilter(queryParams)), HttpStatus.OK);
             }
 
@@ -122,9 +135,10 @@ public class WeatherApiRestController {
                 }
                 list = weatherServiceImpl.getAllByLocationLatLng(latLng[0], latLng[1]);
             }
-            return new ResponseEntity(new WeatherResponseDTOAdapter().buildAll(list), HttpStatus.OK);
+            return new ResponseEntity<>(new WeatherResponseDTOAdapter().buildAll(list), HttpStatus.OK);
         }
-        return new ResponseEntity(new WeatherResponseDTOAdapter().buildAll(weatherServiceImpl.getAll()), HttpStatus.OK);
+        return new ResponseEntity<>(new WeatherResponseDTOAdapter().buildAll(weatherServiceImpl.getAll()),
+                HttpStatus.OK);
     }
 
     /**
@@ -208,7 +222,7 @@ public class WeatherApiRestController {
      * @ particular location on a given date.
      */
     @RequestMapping(path = "/weather/locations", method = RequestMethod.GET)
-    private ResponseEntity getAllByLocation(@RequestParam String date, @RequestParam String lat,
+    private ResponseEntity<?> getAllByLocation(@RequestParam String date, @RequestParam String lat,
                                               @RequestParam String lon){
         logger.info("date = "+date);
         logger.info("lat = "+lat);
@@ -217,7 +231,7 @@ public class WeatherApiRestController {
             return new ResponseEntity<>(new ErrorResponseDTO("The location with lat,lng: ("+
                     lat+", "+lon+")"+" does not exist!"), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity(new WeatherResponseDTOAdapter().
+        return new ResponseEntity<>(new WeatherResponseDTOAdapter().
                 buildAll(weatherServiceImpl.getAllByLocationLatLngAndDate(lat, lon, date)),
                 HttpStatus.OK);
     }

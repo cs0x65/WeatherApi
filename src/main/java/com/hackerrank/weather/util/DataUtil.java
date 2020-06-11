@@ -3,7 +3,7 @@ package com.hackerrank.weather.util;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class DTOUtil {
+public class DataUtil {
     public static Float[] buildTemperature(String str){
         if (str == null)
             return new Float[]{};

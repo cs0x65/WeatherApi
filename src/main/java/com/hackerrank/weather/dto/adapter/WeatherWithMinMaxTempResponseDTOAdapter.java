@@ -2,7 +2,6 @@ package com.hackerrank.weather.dto.adapter;
 
 import com.hackerrank.weather.dto.WeatherWithMinMaxTempResponseDTO;
 import com.hackerrank.weather.model.Weather;
-import com.hackerrank.weather.util.DTOUtil;
 import com.hackerrank.weather.util.DateTimeUtil;
 
 import java.util.List;
@@ -20,10 +19,8 @@ public class WeatherWithMinMaxTempResponseDTOAdapter implements
         dto.setLon(weather.getLocation().getLongitude());
         dto.setDate(DateTimeUtil.getDateFormat().format(weather.getDateRecorded()));
         dto.setDate(DateTimeUtil.getDateFormat().format(weather.getDateRecorded()));
-
-        Float[] temperature = DTOUtil.buildTemperature(weather.getTemperature());
-        dto.setHighest(temperature[temperature.length-1]);
-        dto.setLowest(temperature[0]);
+        dto.setHighest(weather.getHighestTemp());
+        dto.setLowest(weather.getLowestTemp());
 
         return dto;
     }

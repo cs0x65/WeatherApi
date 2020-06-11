@@ -1,5 +1,7 @@
 package com.hackerrank.weather.model;
 
+import com.hackerrank.weather.util.DataUtil;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -19,6 +21,13 @@ public class Weather extends BaseEntity{
     private Location location;
 
     private String temperature;
+
+    // this kind of change actually mandates the migration, which will set values for the existing records.
+    @Column(name = "lowest_temp")
+    private Float lowestTemp;
+
+    @Column(name = "highest_temp")
+    private Float highestTemp;
 
     public Weather() {
     }
@@ -60,5 +69,28 @@ public class Weather extends BaseEntity{
 
     public void setTemperature(String temperature) {
         this.temperature = temperature;
+    }
+
+    public Float getLowestTemp() {
+        if (lowestTemp == null){
+            lowestTemp = DataUtil.buildTemperature(temperature)[0];
+        }
+        return lowestTemp;
+    }
+
+    public void setLowestTemp(Float lowestTemp) {
+        this.lowestTemp = lowestTemp;
+    }
+
+    public Float getHighestTemp() {
+        if (highestTemp == null){
+            Float[] temp = DataUtil.buildTemperature(temperature);
+            highestTemp = temp[temp.length-1];
+        }
+        return highestTemp;
+    }
+
+    public void setHighestTemp(Float highestTemp) {
+        this.highestTemp = highestTemp;
     }
 }
