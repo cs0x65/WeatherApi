@@ -55,6 +55,7 @@ public class WeatherApiRestController {
      */
     @RequestMapping(path = "/weather", method = RequestMethod.POST)
     private ResponseEntity<? extends ResponseDTO> create(@RequestBody WeatherDTO dto){
+        logger.info("Request = "+dto);
         if (dto.getId() != null && weatherServiceImpl.getById(dto.getId()) != null){
             return new ResponseEntity<>(new ErrorResponseDTO("The weather data with id:"+dto.getId()+
                     " already exists!"), HttpStatus.BAD_REQUEST);

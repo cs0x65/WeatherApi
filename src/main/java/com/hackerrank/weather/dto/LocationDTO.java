@@ -7,6 +7,16 @@ public class LocationDTO implements RequestDTO, ResponseDTO{
     private Float lat;
     private Float lon;
 
+    public LocationDTO(){
+    }
+
+    public LocationDTO(String city, String state, Float lat, Float lon) {
+        this.city = city;
+        this.state = state;
+        this.lat = lat;
+        this.lon = lon;
+    }
+
     public Long getId() {
         return id;
     }
